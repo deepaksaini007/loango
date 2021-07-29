@@ -55,7 +55,7 @@ body {
 .dropZone {
     height: 100px;
     margin: auto;
-    border: 1px dotted #9E6CB1;
+    border: 1px dotted #007FC6 ;
     border-radius: 12px;
 }
 
@@ -68,7 +68,7 @@ body {
     align-items: center;
     justify-content: center;
     height: 100px;
-    color: #9E6CB1;
+    color: #007FC6 ;
 }
 
 .ngx-file-drop__drop-zone-label {
@@ -293,7 +293,7 @@ body {
 .text-primary,
 .list-wrapper .completed .remove,
 .horizontal-menu .bottom-navbar .page-navigation>.nav-item.mega-menu .submenu .category-heading {
-    color: #9E6CB1 !important;
+    color: #007FC6  !important;
 }
 
 .text-grey {
@@ -352,7 +352,7 @@ body {
 .text-primary,
 .list-wrapper .completed .remove,
 .horizontal-menu .bottom-navbar .page-navigation>.nav-item.mega-menu .submenu .category-heading {
-    color: #9E6CB1;
+    color: #007FC6 ;
 }
 
 .text-grey {
@@ -447,7 +447,7 @@ h4,
 }
 
 .bg-primary {
-    background-color: #4E2C58 !important;
+    background-color: #025989 !important;
 }
 
 // .jsgrid .jsgrid-table thead th
@@ -459,7 +459,7 @@ h4,
             border-bottom-width: 1px;
             font-weight: 500;
             font-size: .875rem;
-            color: #9E6CB1;
+            color: #007FC6 ;
             vertical-align: bottom;
             border-bottom: 2px solid #f3f3f3;
             line-height: 1;
@@ -500,7 +500,7 @@ h4,
         background: #f69372;
         color: #fff;
         span {
-            background: #9E6CB1;
+            background: #007FC6 ;
             padding: 0.35rem;
             display: inline-block;
             margin-right: 0.4rem;
@@ -509,7 +509,7 @@ h4,
 }
 
 .strap-background {
-    background-color: #4E2C58 !important;
+    background-color: #025989 !important;
     color: #fff;
 }
 
@@ -561,7 +561,7 @@ p {
 
 .btn-custom {
     border: 1px solid white !important;
-    color: #9E6CB1;
+    color: #007FC6 ;
     background: #fff;
 }
 
@@ -769,12 +769,12 @@ p {
             color: $secondary;
             &:hover,
             &:focus {
-                color: #9E6CB1;
+                color: #007FC6 ;
             }
             &.btn-primary,
             &.active {
                 color: $white !important;
-                background-color: #9E6CB1 !important;
+                background-color: #007FC6  !important;
             }
         }
     }
@@ -2897,7 +2897,7 @@ footer.copyright-1 {
             }
             &.card-predict {
                 .card-thumbnail {
-                    background: radial-gradient(#9E6CB1, #AA121B);
+                    background: radial-gradient(#007FC6 , #AA121B);
                     position: relative;
                     .stadium {
                         width: 60%;
