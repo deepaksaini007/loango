@@ -1,0 +1,131 @@
+<app-header> </app-header>
+<div class="container-fluid page-body-wrapper bevel tlbr">
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <!--TITLE -->
+      <div id="paper-top" class="col-md-12">
+        <div class="row">
+          <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Item Lists s
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-lg-12 grid-margin stretch-card">
+          <div class="card">
+
+            <div class="row">
+              <div class="strap-background card-heading-wrap">
+                <h4 class="card-title bg-primary text-white p-2">Item List</h4>
+                <div class="card-heading-action">
+                  <button
+                    type="button"
+                    (click)="openItemDialog()"
+                    class="btn btn-custom btn-sm"
+                  >
+                    Add Item
+                  </button>
+                </div>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="col-md-12 dispatch-board-top-section mb-2">
+                <ul
+                  class="nav nav-pills nav-pills-custom"
+                  id="pills-tab-custom"
+                  role="tablist"
+                >
+                  <li class="nav-item" *ngFor="let item of categoryKeys">
+                    <a
+                      class="btn"
+                      matRipple
+                      [ngClass]="{
+                        'btn-primary': activeCategoryView === item,
+                        'not-active': activeCategoryView !== item
+                      }"
+                      (click)="changeCategoryView(item)"
+                      >{{ item | uppercase }}
+                      ({{ allItemMasterData && allItemMasterData[item]?.length }})
+                    </a>
+                  </li>
+                </ul>
+
+              </div>
+              <div class="row card-row">
+                <div *ngIf="rowData && rowData.length <= 0">
+                  <app-no-rows [noRowsMessage]="'No Item Found'"></app-no-rows>
+                </div>
+                <div
+                  class="col-lg-3 col-md-4 col-sm-6 col-xs-12 card-col"
+                  *ngFor="let row of rowData"
+                >
+                  <div class="card h-100 card-common card-common-no-thumb">
+                    <div class="card h-100 card-common card-common-no-thumb">
+                      <div class="card-action">
+                        <button
+                          mat-icon-button
+                          [matMenuTriggerFor]="menu"
+                          aria-label="Example icon-button with a menu"
+                        >
+                          <mat-icon>more_vert</mat-icon>
+                        </button>
+                        <mat-menu #menu="matMenu">
+                          <button mat-menu-item (click)="updateItemList(row)">
+                            <span>Edit</span>
+                          </button>
+                          <button
+                            mat-menu-item
+                            (click)="activateDeactivateItem(row)"
+                          >
+                            <span *ngIf="!row.is_active">Active</span>
+                            <span *ngIf="row.is_active">Deactive</span>
+                          </button>
+
+                          <button
+                            (click)="deleteItems(row)"
+                            mat-menu-item
+                            style="
+                              background-color: #4e2c58 !important;
+                              color: #fff !important;
+                            "
+                          >
+                            <span>Delete</span>
+                          </button>
+                        </mat-menu>
+                      </div>
+                      <div class="card-thumbnail">
+                        <img [src]="row.item_icon" alt="" />
+                      </div>
+                      <div class="card-body">
+                        <div class="card-title">
+                          <h2 class="text-primary">{{ row.item_title_en }}</h2>
+                        </div>
+                        <!-- <div class="card-description">
+                          <h3>Description</h3>
+                          <p [innerHtml]="row.description_en"></p>
+                        </div> -->
+                        <div class="publish-date-body">
+                          <p>
+                            <span>Publish Date: </span
+                            >{{ getFormattedInsDate(row.created_on) }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-footer></app-footer>

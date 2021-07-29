@@ -1,0 +1,84 @@
+<div class="modal-head">
+  <h4>Dashboard Banner</h4>
+  <i class="material-icons" (click)="closeDialog()">close</i>
+</div>
+<mat-dialog-content class="mat-typography">
+  <form class="add-driver" [formGroup]="bannerFormGroup">
+    <div class="row">
+<div class="col-md-9">
+  <div class="row">
+  <div class="col-md-12">
+    <mat-form-field appearance="outline">
+      <mat-label>Title Name in English <span class="text-primary"  *ngIf="validatorService.hasRequiredField(bannerFormGroup.get('title_en'))">*</span></mat-label>
+      <input matInput type="text" formControlName="title_en" placeholder="Enter Title Name in English"
+        minlength="5" maxlength="200">
+    <mat-error>Title Name is Required (minimum 5 char)</mat-error>
+    </mat-form-field>
+  </div>
+  <div class="col-md-12">
+    <mat-form-field appearance="outline">
+      <mat-label>Title Name In Hindi<span class="text-primary" *ngIf="validatorService.hasRequiredField(bannerFormGroup.get('title_hn'))">*</span></mat-label>
+      <input matInput type="text" formControlName="title_hn" placeholder="Enter Title Name in Hindi" minlength="5"
+        maxlength="200">
+        <mat-error>Title Name is Required (minimum 5 char)</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="col-md-8">
+    <mat-form-field appearance="outline">
+      <mat-label>Url<span class="text-primary" *ngIf="validatorService.hasRequiredField(bannerFormGroup.get('url'))">*</span></mat-label>
+      <input matInput type="text" formControlName="url" placeholder="Enter URL" minlength="10" maxlength="500">
+      <mat-error>URL is Required (minimum 10 char)</mat-error>
+    </mat-form-field>
+
+  </div>
+  <div class="col-md-4">
+
+    <mat-form-field appearance="outline">
+      <mat-label>Is Active <span class="text-primary" *ngIf="validatorService.hasRequiredField(bannerFormGroup.get('is_active'))">*</span></mat-label>
+      <mat-select formControlName="is_active" >
+        <mat-option [value]="true"> yes
+        </mat-option>
+        <mat-option [value]="false"> no
+        </mat-option>
+
+      </mat-select>
+      <mat-error>Select Status</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+</div>
+<div class="col-md-3">
+  <div class="col-md-12">
+    <app-image-upload [base64Image]="base64Thumbnail" [isUrl]="isUrl" (onImageChanged)="onThumbnailAdded($event)">
+    </app-image-upload>
+
+  </div>
+</div>
+
+      <div class="col-md-6">
+        <label>Description Name in English <span class="text-primary" *ngIf="validatorService.hasRequiredField(bannerFormGroup.get('description_en'))">*</span></label>
+        <ckeditor formControlName="description_en" [config]="ckEditorConfig" [editor]="Editor" minlength="10">
+          <mat-error>Description is Required (minimum 10 char)</mat-error>
+        </ckeditor>
+
+      </div>
+      <div class="col-md-6">
+        <label>Description Name in Hindi <span class="text-primary"  *ngIf="validatorService.hasRequiredField(bannerFormGroup.get('description_hn'))">*</span></label>
+        <ckeditor [config]="ckEditorConfig" formControlName="description_hn" [editor]="Editor" minlength="10">
+        </ckeditor>
+      </div>
+
+
+
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+
+  <div class="text-right btn-wrap">
+    <button class="btn btn-primary" type="submit" [disabled]="!bannerFormGroup.valid"  (click)="submitForm()">
+      Submit
+    </button>
+  </div>
+</mat-dialog-actions>

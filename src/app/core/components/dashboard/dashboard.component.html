@@ -1,0 +1,228 @@
+<app-header> </app-header>
+<div class="container-fluid page-body-wrapper bevel tlbr">
+  <div class="main-panel">
+    <div class="content-wrapper">
+      <!--TITLE -->
+      <div id="paper-top" class="col-md-12">
+        <div class="row">
+          <nav aria-label="breadcrumb ">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="/dashboard">Home</a></li>
+              <li class="breadcrumb-item active" aria-current="page">
+                Dashboard
+              </li>
+            </ol>
+          </nav>
+        </div>
+      </div>
+
+      <div class="row ">
+        <div class="col-md-3 my-2 dashboard-cards1">
+          <div class="card card1">
+            <div class="card-thumbnail card-thumbnail-1">
+              <mat-icon
+                role="img"
+                class="mat-icon notranslate material-icons mat-icon-no-color"
+                aria-hidden="true"
+                data-mat-icon-type="font"
+                >play_circle_outline</mat-icon
+              >
+            </div>
+            <div class="card-info">
+            <!-- <h3>{{dashboardData?.Add}}</h3> -->
+            <h3>5</h3>
+              <p>Total Add's</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 my-2 dashboard-cards1">
+          <div class="card card1">
+            <div class="card-thumbnail card-thumbnail-5">
+              <mat-icon
+                role="img"
+                class="mat-icon notranslate material-icons mat-icon-no-color"
+                aria-hidden="true"
+                data-mat-icon-type="font"
+                >auto_stories</mat-icon
+              >
+            </div>
+            <div class="card-info">
+              <h3>9</h3>
+              <p>Total Banner</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-3 my-2 dashboard-cards1">
+          <div class="card card1">
+            <div class="card-thumbnail card-thumbnail-2">
+              <mat-icon
+                role="img"
+                class="mat-icon notranslate material-icons mat-icon-no-color"
+                aria-hidden="true"
+                data-mat-icon-type="font"
+                >sports_cricket</mat-icon
+              >
+            </div>
+            <div class="card-info">
+              <h3>6</h3>
+              <p>Total Loan Items</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 my-2 dashboard-cards1">
+          <div class="card card1">
+            <div class="card-thumbnail card-thumbnail-3">
+              <mat-icon
+                role="img"
+                class="mat-icon notranslate material-icons mat-icon-no-color"
+                aria-hidden="true"
+                data-mat-icon-type="font"
+                >play_circle_outline</mat-icon
+              >
+            </div>
+            <div class="card-info">
+              <h3>6</h3>
+              <p>Total Credit Card</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-3 my-2 dashboard-cards1">
+          <div class="card card1">
+            <div class="card-thumbnail card-thumbnail-4">
+              <mat-icon
+                role="img"
+                class="mat-icon notranslate material-icons mat-icon-no-color"
+                aria-hidden="true"
+                data-mat-icon-type="font"
+                >article</mat-icon
+              >
+            </div>
+            <div class="card-info">
+              <h3>8</h3>
+              <p>Total Insurances</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="card ">
+              <div class="row">
+                <div class="strap-background card-heading-wrap">
+                  <h4 class="card-title bg-primary text-white p-2">
+                    Item List
+                  </h4>
+                  <div class="card-heading-action">
+                    <button
+                      type="button"
+                      (click)="openItemDialog()"
+                      class="btn btn-custom btn-sm mr-2"
+                    >
+                      Add Item
+                    </button>
+                    <button
+                    type="button"
+                    routerLink="/category"
+                    class="btn btn-custom btn-sm"
+                  >
+                    Explore All
+                  </button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="table-responsive tbl-height">
+                  <ag-grid-angular
+                    style="width: 100%; height: 100%"
+                    class="ag-theme-material"
+                    [defaultColDef]="defaultColDef"
+                    [frameworkComponents]="frameworkComponents"
+                    [rowData]="rowData | async"
+                    [columnDefs]="columnDefs"
+                  ></ag-grid-angular>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="card">
+              <div class="row">
+                <div class="strap-background card-heading-wrap">
+                  <h4 class="card-title bg-primary text-white p-2">Banners</h4>
+                  <div class="card-heading-action">
+                    <button type="button" (click)="openBannerDialog()" class="btn btn-custom btn-sm">Add Banner</button>
+                  </div>
+                </div>
+              </div>
+
+              <div class="card-body">
+                <div class="row card-row">
+                  <!-- <div
+                    class="col-md-3 my-2 dashboard-cards"
+                    *ngFor="let banner of (dashboardDetails | async)?.banners"
+                  >
+                    <div class="card">
+                      <button
+                      mat-icon-button
+
+                      aria-label="Example icon-button with a menu"
+                    >
+                      <mat-icon>edit</mat-icon>
+                    </button>
+                      <div class="">
+                        <img [src]="banner.banner_image" height="50" width="50">
+                      </div>
+                      <div class="card-info">
+                        <h4>{{ banner.title_en }}</h4>
+                      </div>
+                    </div>
+                  </div> -->
+
+                  <div  class="col-lg-3 col-md-4 col-sm-6 col-xs-12 card-col dashboard-cards"
+                  *ngFor="let banner of (dashboardDetails | async)?.banners" >
+                  <div class="card h-100 card-common card-common-no-thumb">
+
+                      <div class="card-action">
+                        <button mat-icon-button aria-label="Example icon-button with a menu" >
+                          <mat-icon  style="font-size: 12px;" (click)="updateBanner(banner)">edit</mat-icon>
+                        </button>
+
+                      </div>
+                      <div class="card-thumbnail">
+                        <img [src]="banner.banner_image" height="50" width="50">
+                      </div>
+                        <div class="card-info">
+                          <p class="text-primary">{{ banner.title_en }} </p>
+                          <p [innerHTML]="banner.url?.substring(0,20) + '...'"></p>
+
+                        </div>
+
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <router-outlet></router-outlet>
+      <div class="row ag-grid-wrapper">
+        <div class="col-md-8 margin-col">
+
+        </div>
+        <div class="col-md-4 margin-col">
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<app-footer></app-footer>

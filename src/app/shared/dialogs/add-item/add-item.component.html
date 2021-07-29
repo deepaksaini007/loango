@@ -1,0 +1,177 @@
+<div class="modal-head">
+  <h4>Add Item List</h4>
+  <i class="material-icons" (click)="closeDialog()">close</i>
+</div>
+<mat-dialog-content class="mat-typography">
+  <form class="add-driver" [formGroup]="itemFormGroup">
+    <div class="row">
+      <div class="col-md-4">
+
+        <mat-form-field appearance="outline">
+          <mat-label>Select Category <span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('item_type'))">*</span></mat-label>
+          <mat-select formControlName="item_type" >
+            <mat-option value="Loan"> Loan
+            </mat-option>
+            <mat-option value="Credit Card"> Credit Card
+            </mat-option>
+          <mat-option value="Insurance">Insurance</mat-option>
+          </mat-select>
+          <mat-error>Select Item Category</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Select Item Type <span class="text-primary"  *ngIf="validatorService.hasRequiredField(itemFormGroup.get('category_details'))">*</span></mat-label>
+          <mat-select formControlName="category_details" [compareWith]="objectComparisonFunction">
+            <mat-option *ngFor="let option of allCategories$ | async" [value]="option">{{ option.item_name_en }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Select Item Type</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-4">
+        <mat-form-field appearance="outline">
+          <mat-label>Company Name
+            <span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('company_name'))">*</span>
+          </mat-label>
+          <input matInput type="text" formControlName="company_name" placeholder="Enter Company Name" minlength="5"
+            maxlength="500" />
+            <mat-error>Enter Company Name (minimum 5 char ) </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Title in English
+            <span class="text-primary"  *ngIf="validatorService.hasRequiredField(itemFormGroup.get('item_title_en'))">*</span>
+          </mat-label>
+          <input matInput type="text" formControlName="item_title_en" placeholder="Enter Title in English" minlength="5"
+            maxlength="500" />
+            <mat-error>Enter Title (minimum 5 char )</mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-md-6">
+        <mat-form-field appearance="outline">
+          <mat-label>Title In Hindi<span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('item_title_hn'))">*</span></mat-label>
+          <input matInput type="text" formControlName="item_title_hn" placeholder="Enter Title In Hindi" minlength="5"
+            maxlength="500" />
+            <mat-error>Enter Title (minimum 5 char )</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-9">
+            <div class="row">
+
+
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Max Amount<span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('max_amount'))">*</span></mat-label>
+                  <input matInput type="text" formControlName="max_amount" placeholder="Enter Max Amount" minlength="1"
+                    maxlength="1000" />
+                    <mat-error>Enter Max Amount (minimum 1 char )</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Processing Fee<span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('processing_fees'))">*</span></mat-label>
+                  <input matInput type="text" formControlName="processing_fees" placeholder="Enter Processing Fee" minlength="1"
+                    maxlength="100" />
+                    <mat-error>Enter Processing Fee (minimum 1 char )</mat-error>
+                </mat-form-field>
+              </div>
+
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Interest Rate<span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('interest_rate'))">*</span></mat-label>
+                  <input matInput type="text" formControlName="interest_rate" placeholder="Enter Interest Rate" minlength="1"
+                    maxlength="100" />
+                    <mat-error>Enter Interest Rate (minimum 1 char ) </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Max Range <span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('max_range'))">*</span> </mat-label>
+                  <input matInput type="text" formControlName="max_range" placeholder="Enter Max Range" minlength="1"
+                    maxlength="100" />
+                    <mat-error>Enter Max Range  (minimum 1 char )</mat-error>
+                </mat-form-field>
+              </div>
+
+
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Monthly Interest <span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('monthly_interest'))">*</span></mat-label>
+                  <input matInput type="text" formControlName="monthly_interest" placeholder="Enter Monthly Interest" minlength="1"
+                    maxlength="100" />
+                    <mat-error>Enter Monthly Interest (minimum 5 char ) </mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>{{isInsuranceSelected?'Policy Duration':'Tenure'}} <span class="text-primary"  *ngIf="validatorService.hasRequiredField(itemFormGroup.get('tenure'))">*</span></mat-label>
+                  <input matInput type="text" [placeholder]="isInsuranceSelected?'Policy Duration':'Tenure'" formControlName="tenure" minlength="5"
+                    maxlength="100" />
+                    <mat-error>Enter {{isInsuranceSelected?'Policy Duration':'Tenure'}}  (minimum 5 char )</mat-error>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Deal Type <span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('deal_type'))">*</span></mat-label>
+                  <input matInput type="text" placeholder="Enter Deal Type " maxlength="100" minlength="1" formControlName="deal_type">
+                  <mat-error>Enter Deal Type  (minimum 1 char ) </mat-error>  </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Trusted<span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('is_trusted'))">*</span></mat-label>
+                  <mat-select formControlName="is_trusted">
+                    <mat-option [value]="true">Yes</mat-option>
+                    <mat-option [value]="false">No</mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label> Redirect <span class="text-primary"  *ngIf="validatorService.hasRequiredField(itemFormGroup.get('is_redirect'))">*</span></mat-label>
+                  <mat-select formControlName="is_redirect">
+                    <mat-option [value]="true">Yes</mat-option>
+                    <mat-option [value]="false">No </mat-option>
+                  </mat-select>
+                </mat-form-field>
+              </div>
+              <div class="col-md-6">
+                <mat-form-field appearance="outline">
+                  <mat-label>Redirect URL <span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('redirect_url'))">*</span></mat-label>
+                  <input matInput type="text" formControlName="redirect_url" minlength="10" placeholder="Enter Redirect URL" maxlength="450" />
+                  <mat-error>Enter Redirect URL  (minimum 10 char )</mat-error> </mat-form-field>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="col-md-12">
+              <app-image-upload (onImageChanged)="onThumbnailAdded($event)" [base64Image]="base64Thumbnail"
+                [isUrl]="isUrl"></app-image-upload>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-6">
+        <label>Description Name in English <span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('description_en'))">*</span></label>
+        <ckeditor formControlName='description_en' [config]="ckEditorConfig" [editor]="Editor" minlength="10"></ckeditor>
+      </div>
+
+      <div class="col-md-6">
+        <label>Description Name in Hindi <span class="text-primary" *ngIf="validatorService.hasRequiredField(itemFormGroup.get('description_hn'))">*</span></label>
+        <ckeditor formControlName="description_hn" [config]="ckEditorConfig" [editor]="Editor"  minlength="10"></ckeditor>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <div class="text-right btn-wrap">
+    <button (click)="submitData()" class="btn btn-primary"  [disabled]="!itemFormGroup.valid" type="submit">Submit</button>
+  </div>
+</mat-dialog-actions>
